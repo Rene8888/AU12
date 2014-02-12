@@ -1,0 +1,28 @@
+package hackenbergerhollander;
+
+/**
+ * Interface to manage Ciphers
+ * 
+ * @author Rene Hollander
+ */
+public interface Cipher {
+
+	/**
+	 * Method to encrypt a String
+	 * 
+	 * @param in
+	 *            String to encrypt
+	 * @return Encrypted String
+	 */
+	public String encrypt(String in);
+
+	/**
+	 * Method to decrypt a String
+	 * 
+	 * @param in
+	 *            String to decrypt
+	 * @return Decrypted String
+	 */
+	public String decrypt(String in);
+
+}
