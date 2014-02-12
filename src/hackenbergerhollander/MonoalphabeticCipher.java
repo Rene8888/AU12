@@ -8,13 +8,14 @@ package hackenbergerhollander;
  */
 public class MonoalphabeticCipher implements Cipher {
 
-	private String secretAlphabet;
+	private char[] secretAlphabet;
 
 	/**
 	 * Creates a new Monoalphabetic Cipher
 	 */
 	public MonoalphabeticCipher() {
-
+		// Adds all letters from a to z to the alphabet
+		this.secretAlphabet = Util.getAlphabet();
 	}
 
 	/**
@@ -22,16 +23,16 @@ public class MonoalphabeticCipher implements Cipher {
 	 * 
 	 * @return Secret Alphabet
 	 */
-	public String getSecretAlphabet() {
+	public char[] getSecretAlphabet() {
 		return this.secretAlphabet;
 	}
 
 	public String encrypt(String in) {
-		return null;
+		return in;
 	}
 
 	public String decrypt(String in) {
-		return null;
+		return in;
 	}
 
 }
