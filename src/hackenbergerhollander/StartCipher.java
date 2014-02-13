@@ -15,10 +15,6 @@ public class StartCipher {
 	 */
 	public static void main(String[] args) {
 
-		KeywordCipher kc = new KeywordCipher("Geheimes Passwort!");
-
-		System.out.println(new String(kc.getSecretAlphabet()));
-
 	}
 
 }

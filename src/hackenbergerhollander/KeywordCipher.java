@@ -47,6 +47,7 @@ public class KeywordCipher extends MonoalphabeticCipher {
 	public void setKeyword(String keyWord) {
 		this.keyWord = keyWord;
 		this.secretAlphabet = this.generateAlphabet(this.keyWord);
+		super.setSecretAlphabet(this.secretAlphabet);
 	}
 
 	/**
@@ -79,7 +80,7 @@ public class KeywordCipher extends MonoalphabeticCipher {
 								if (al.size() >= 26)
 									break;
 								int i = b1 + b2 + b3 + b4 + b5;
-								char c = (char) (Util.minimizeInt(i, 26) + 'a');
+								char c = Util.getCharFromAlphabet(Util.minimizeInt(i, Util.getAlphabetLength()));
 								if (al.contains(c)) {
 									continue;
 								} else {

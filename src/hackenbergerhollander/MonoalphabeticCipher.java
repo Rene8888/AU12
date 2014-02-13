@@ -27,12 +27,57 @@ public class MonoalphabeticCipher implements Cipher {
 		return this.secretAlphabet;
 	}
 
+	/**
+	 * Sets the Secret alphabet
+	 * 
+	 * @param secretAlphabet
+	 *            secret alphabet
+	 */
+	public void setSecretAlphabet(char[] secretAlphabet) {
+		this.secretAlphabet = secretAlphabet;
+	}
+
 	public String encrypt(String in) {
-		return in;
+		char[] input = in.toLowerCase().toCharArray();
+		for (int i = 0; i < input.length; i++) {
+			int pos = Util.getCharPositionInAlphabet(input[i]);
+			if (pos != -1) {
+				input[i] = this.secretAlphabet[pos];
+			}
+		}
+		return new String(input);
 	}
 
 	public String decrypt(String in) {
-		return in;
+		char[] input = in.toLowerCase().toCharArray();
+		for (int i = 0; i < input.length; i++) {
+			int pos = this.getCharPositionInSecretAlphabet(input[i]);
+			if (pos != -1) {
+				input[i] = Util.getCharFromAlphabet(pos);
+			}
+		}
+		return new String(input);
 	}
 
+	private int getCharPositionInSecretAlphabet(char c) {
+		if (this.isInSecretAlphabet(c)) {
+			for (int i = 0; i < this.secretAlphabet.length; i++) {
+				if (this.secretAlphabet[i] == c) {
+					return i;
+				}
+			}
+			return -1;
+		} else {
+			return -1;
+		}
+	}
+
+	private boolean isInSecretAlphabet(char in) {
+		for (char c : this.secretAlphabet) {
+			if (in == c) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

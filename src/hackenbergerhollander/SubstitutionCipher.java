@@ -38,6 +38,7 @@ public class SubstitutionCipher extends MonoalphabeticCipher {
 	 */
 	public void setSecretAlphabet(char[] secretAlphabet) {
 		this.secretAlphabet = secretAlphabet;
+		super.setSecretAlphabet(this.secretAlphabet);
 	}
 
 	/**
