@@ -15,7 +15,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 
-		ShiftCipher cipher = new ShiftCipher(-5);
+		Cipher cipher = new KeywordCipher("1234");
 
 		String decoded = cipher.encrypt("Hallo Welt!");
 
