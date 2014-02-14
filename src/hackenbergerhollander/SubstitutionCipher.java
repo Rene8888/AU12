@@ -7,8 +7,6 @@ package hackenbergerhollander;
  */
 public class SubstitutionCipher extends MonoalphabeticCipher {
 
-	private char[] secretAlphabet;
-
 	/**
 	 * Creates a new Substitution Cipher
 	 * 
@@ -37,8 +35,7 @@ public class SubstitutionCipher extends MonoalphabeticCipher {
 	 *            Secret Alphabet
 	 */
 	public void setSecretAlphabet(char[] secretAlphabet) {
-		this.secretAlphabet = secretAlphabet;
-		super.setSecretAlphabet(this.secretAlphabet);
+		super.setSecretAlphabet(secretAlphabet);
 	}
 
 	/**
@@ -49,10 +46,6 @@ public class SubstitutionCipher extends MonoalphabeticCipher {
 	 */
 	public void setSecretAlphabet(String secretAlphabet) {
 		this.setSecretAlphabet(secretAlphabet.toCharArray());
-	}
-
-	public char[] getSecretAlphabet() {
-		return this.secretAlphabet;
 	}
 
 }

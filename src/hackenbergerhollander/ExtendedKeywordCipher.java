@@ -15,8 +15,6 @@ public class ExtendedKeywordCipher extends MonoalphabeticCipher {
 
 	private MessageDigest sha512;
 
-	private char[] secretAlphabet;
-
 	/**
 	 * Creates a new Keyword Cipher
 	 * 
@@ -34,10 +32,6 @@ public class ExtendedKeywordCipher extends MonoalphabeticCipher {
 		this.setKeyword(keyWord);
 	}
 
-	public char[] getSecretAlphabet() {
-		return this.secretAlphabet;
-	}
-
 	/**
 	 * Sets the Keyword
 	 * 
@@ -46,8 +40,7 @@ public class ExtendedKeywordCipher extends MonoalphabeticCipher {
 	 */
 	public void setKeyword(String keyWord) {
 		this.keyWord = keyWord;
-		this.secretAlphabet = this.generateAlphabet(this.keyWord);
-		super.setSecretAlphabet(this.secretAlphabet);
+		super.setSecretAlphabet(this.generateAlphabet(this.keyWord));
 	}
 
 	/**

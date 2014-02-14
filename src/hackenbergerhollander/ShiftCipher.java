@@ -9,8 +9,6 @@ public class ShiftCipher extends MonoalphabeticCipher {
 
 	private int shiftValue;
 
-	private char[] secretAlphabet;
-
 	/**
 	 * Creates a new Shift Cipher
 	 * 
@@ -22,10 +20,6 @@ public class ShiftCipher extends MonoalphabeticCipher {
 		this.setShiftAmount(shiftValue);
 	}
 
-	public char[] getSecretAlphabet() {
-		return this.secretAlphabet;
-	}
-
 	/**
 	 * Sets the ShiftValue 0 > shiftvalue < infinity
 	 * 
@@ -34,8 +28,7 @@ public class ShiftCipher extends MonoalphabeticCipher {
 	 */
 	public void setShiftAmount(int shiftValue) {
 		this.shiftValue = Util.minimizeInt(shiftValue, Util.getAlphabetLength());
-		this.secretAlphabet = this.generateAlphabet(shiftValue);
-		super.setSecretAlphabet(this.secretAlphabet);
+		super.setSecretAlphabet(this.generateAlphabet(shiftValue));
 	}
 
 	/**
