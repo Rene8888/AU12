@@ -1,9 +1,9 @@
 package enums;
 
 /**
+ * Represents the 3 different types of the monoalphabetic Cipher
  * 
  * @author Hackenberger Christoph
- *
  */
 public enum SubType {
 

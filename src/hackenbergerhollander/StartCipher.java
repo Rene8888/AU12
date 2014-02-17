@@ -14,7 +14,7 @@ public class StartCipher {
 	 *            Command Line arguments
 	 */
 	public static void main(String[] args) {
-
+		new Control();
 	}
 
 }
