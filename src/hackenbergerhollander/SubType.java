@@ -1,4 +1,4 @@
-package enums;
+package hackenbergerhollander;
 
 /**
  * Represents the 3 different types of the monoalphabetic Cipher

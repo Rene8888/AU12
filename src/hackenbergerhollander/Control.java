@@ -1,6 +1,5 @@
 package hackenbergerhollander;
 
-import enums.SubType;
 
 /**
  * Control part of the MVC for the GUI
