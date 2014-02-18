@@ -12,6 +12,8 @@ public class SubstitutionCipher extends MonoalphabeticCipher {
 	 * 
 	 * @param secretAlphabet
 	 *            Secret Alphabet
+	 * @throws IllegalArgumentException
+	 *             if the aphabet is invalid
 	 */
 	public SubstitutionCipher(String secretAlphabet) throws IllegalArgumentException {
 		this(secretAlphabet.toCharArray());
@@ -22,6 +24,8 @@ public class SubstitutionCipher extends MonoalphabeticCipher {
 	 * 
 	 * @param secretAlphabet
 	 *            Secret Alphabet
+	 * @throws IllegalArgumentException
+	 *             if the aphabet is invalid
 	 */
 	public SubstitutionCipher(char[] secretAlphabet) throws IllegalArgumentException {
 		super();
@@ -35,8 +39,9 @@ public class SubstitutionCipher extends MonoalphabeticCipher {
 	 *            Secret Alphabet
 	 */
 	public void setSecretAlphabet(char[] secretAlphabet) throws IllegalArgumentException {
-		if(secretAlphabet.length != Util.getAlphabetLength())
-			throw new IllegalArgumentException("The secret alphabet has to contains exactly 30 chars");
+		if (!Util.checkAlphabet(secretAlphabet)) {
+			throw new IllegalArgumentException("The secret alphabet is invalid!");
+		}
 		super.setSecretAlphabet(secretAlphabet);
 	}
 

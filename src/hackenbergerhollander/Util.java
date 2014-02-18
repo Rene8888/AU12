@@ -116,4 +116,47 @@ public class Util {
 		}
 	}
 
+	/**
+	 * Checks if the alphabet is valid
+	 * 
+	 * @param alphabet
+	 *            alphabet to check
+	 * @return true if the alphabet is valid
+	 */
+	public static boolean checkAlphabet(char[] alphabet) {
+		if (alphabet.length == Util.ALPHABET_LENGTH) {
+			for (char c1 : alphabet) {
+				int currcount = 0;
+				for (char c2 : alphabet) {
+					if (c1 == c2) {
+						currcount++;
+					}
+				}
+				if (currcount != 1) {
+					return false;
+				}
+			}
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * Checks if all chars are in the alphabet
+	 * 
+	 * @param chars
+	 *            chars to check
+	 * @return true if the alphabet is only containing chars from the standart
+	 *         alphabet
+	 */
+	public static boolean areInAlphabet(char[] chars) {
+		for (char c : chars) {
+			if (!Util.isInAlphabet(c)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 }
