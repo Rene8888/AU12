@@ -39,7 +39,7 @@ public class View extends JPanel {
 	
 	public View(Control c) {
 		this.c = c;
-		f = new JFrame("MonoAlphabeticChipher");
+		f = new JFrame("MonoAlphabeticCipher");
 		f.setSize(400, 280);
 		f.setResizable(false);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
