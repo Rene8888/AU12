@@ -22,9 +22,10 @@ import javax.swing.JTextField;
  * 
  * @author Hackenberger Christoph
  */
-@SuppressWarnings("serial")
 public class View extends JPanel {
 
+	private static final long serialVersionUID = 2954587672137426890L;
+	
 	private Control c;
 	private JFrame f;
 	private JTextField sub;
@@ -35,6 +36,11 @@ public class View extends JPanel {
 	private JButton encrypt;
 	private JButton decrypt;
 	
+	/**
+	 * Creates a new View Frame
+	 * 
+	 * @param c instance of control
+	 */
 	public View(Control c) {
 		this.c = c;
 		f = new JFrame("MonoAlphabeticChipher");
