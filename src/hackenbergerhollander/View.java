@@ -4,8 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -22,23 +20,23 @@ import javax.swing.JTextField;
  * 
  * @author Hackenberger Christoph
  */
-public class View extends JPanel implements ActionListener, FocusListener {
+@SuppressWarnings("javadoc")
+public class View extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 2954587672137426890L;
 
 	private Control c;
 	private JFrame f;
-	private JTextField sub;
-	private JLabel subText;
-	private JComboBox<SubType> subType;
 
-	private SubType lastSelected = SubType.SUBST;
+	public JTextField sub;
+	public JLabel subText;
+	public JComboBox<SubType> subType;
 
-	private JTextArea message;
-	private JButton encrypt;
-	private JButton decrypt;
+	public SubType lastSelected = SubType.SUBST;
 
-	private String last;
+	public JTextArea message;
+	public JButton encrypt;
+	public JButton decrypt;
 
 	/**
 	 * Creates a new View Frame
@@ -74,7 +72,6 @@ public class View extends JPanel implements ActionListener, FocusListener {
 
 		this.subText = new JLabel(((SubType) this.subType.getSelectedItem()).getTxt());
 		this.sub = new JTextField(20);
-		this.sub.addFocusListener(this);
 		lower_n.add(this.subText);
 		lower_n.add(this.sub);
 
@@ -103,24 +100,19 @@ public class View extends JPanel implements ActionListener, FocusListener {
 
 		this.add(north, BorderLayout.NORTH);
 		this.add(center, BorderLayout.CENTER);
-	}
 
-	public void focusGained(FocusEvent e) {
-		this.last = this.sub.getText();
-	}
-
-	public void focusLost(FocusEvent e) {
-		try {
-			this.c.setParam((SubType) this.subType.getSelectedItem(), this.sub.getText());
-		} catch (IllegalArgumentException ex) {
-			JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			this.sub.setText(this.last);
-		}
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == this.encrypt) {
-			this.message.setText(this.c.encrypt(this.message.getText(), (SubType) this.subType.getSelectedItem()));
+			String last = this.sub.getText();
+			try {
+				this.c.setParam((SubType) this.subType.getSelectedItem(), this.sub.getText());
+				this.message.setText(this.c.encrypt(this.message.getText(), (SubType) this.subType.getSelectedItem()));
+			} catch (IllegalArgumentException ex) {
+				JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				this.sub.setText(last);
+			}
 		} else if (e.getSource() == this.decrypt) {
 			this.message.setText(this.c.decrypt(this.message.getText(), (SubType) this.subType.getSelectedItem()));
 		} else if (e.getSource() == this.subType) {

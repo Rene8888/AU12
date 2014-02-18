@@ -6,13 +6,13 @@ package hackenbergerhollander;
  * @author Hackenberger Christoph
  * 
  */
+@SuppressWarnings("javadoc")
 public class Control {
-
-	@SuppressWarnings("unused")
-	private View view;
-	private ShiftCipher shifter;
-	private SubstitutionCipher subst;
-	private KeywordCipher key;
+	
+	public View view;
+	public ShiftCipher shifter;
+	public SubstitutionCipher subst;
+	public KeywordCipher key;
 
 	/**
 	 * Creates a new Control
