@@ -1,5 +1,7 @@
 package hackenbergerhollander;
 
+import java.util.LinkedHashSet;
+
 /**
  * Keyword Cipher
  * 
@@ -45,6 +47,19 @@ public class KeywordCipher extends MonoalphabeticCipher {
 	 * @return Returns a alphabet
 	 */
 	public char[] generateAlphabet(String keyword) {
-		return null;
+		LinkedHashSet<Character> set = new LinkedHashSet<Character>();
+		for (char c : keyword.toLowerCase().toCharArray()) {
+			set.add(c);
+		}
+		for (char c : Util.getAlphabet()) {
+			set.add(c);
+		}
+		int i = 0;
+		char[] chars = new char[set.size()];
+		for (char c : set) {
+			chars[i] = c;
+			i++;
+		}
+		return chars;
 	}
 }
