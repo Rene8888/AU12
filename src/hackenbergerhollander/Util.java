@@ -152,7 +152,7 @@ public class Util {
 	 */
 	public static boolean areInAlphabet(char[] chars) {
 		for (char c : chars) {
-			if (!Util.isInAlphabet(c)) {
+			if (!Util.isInAlphabet(Character.toLowerCase(c))) {
 				return false;
 			}
 		}
