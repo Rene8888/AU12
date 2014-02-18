@@ -1,6 +1,6 @@
 package hackenbergerhollander.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
@@ -9,6 +9,7 @@ import org.junit.Test;
  * 
  * @author Hackenberger Christoph
  */
+@SuppressWarnings("javadoc")
 public class CipherTest {
 
 	@Test

@@ -2,9 +2,7 @@ package hackenbergerhollander.test;
 
 import static org.junit.Assert.assertEquals;
 import hackenbergerhollander.Control;
-import hackenbergerhollander.KeywordCipher;
 import hackenbergerhollander.SubType;
-import hackenbergerhollander.SubstitutionCipher;
 
 import org.junit.Test;
 
@@ -27,7 +25,7 @@ public class GuiTest {
 		c.view.decrypt.doClick();
 		assertEquals("hallo welt!", c.view.message.getText());
 	}
-	
+
 	@Test
 	public void testKeyword() throws InterruptedException {
 		Control c = new Control();
@@ -39,7 +37,7 @@ public class GuiTest {
 		c.view.decrypt.doClick();
 		assertEquals("hallo welt!", c.view.message.getText());
 	}
-	
+
 	@Test
 	public void testSubstitution() throws InterruptedException {
 		Control c = new Control();

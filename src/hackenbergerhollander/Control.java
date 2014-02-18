@@ -8,7 +8,7 @@ package hackenbergerhollander;
  */
 @SuppressWarnings("javadoc")
 public class Control {
-	
+
 	public View view;
 	public ShiftCipher shifter;
 	public SubstitutionCipher subst;
