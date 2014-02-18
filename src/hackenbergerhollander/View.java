@@ -32,6 +32,8 @@ public class View extends JPanel {
 	private JLabel subText;
 	private JComboBox<SubType> subType;
 	
+	private SubType lastSelected = SubType.SUBST;
+	
 	private JTextArea message;
 	private JButton encrypt;
 	private JButton decrypt;
@@ -132,8 +134,12 @@ public class View extends JPanel {
 			@SuppressWarnings("unchecked")
 			JComboBox<SubType> box = (JComboBox<SubType>) o;
 			SubType type = (SubType) box.getSelectedItem();
+			if(type == lastSelected)
+				return;
+			lastSelected = type;
 			subText.setText(type.getTxt());
 			sub.setColumns(type.getCol());
+			sub.setText("");
 		}
 	}
 	
