@@ -114,7 +114,14 @@ public class View extends JPanel implements ActionListener {
 				this.sub.setText(last);
 			}
 		} else if (e.getSource() == this.decrypt) {
-			this.message.setText(this.c.decrypt(this.message.getText(), (SubType) this.subType.getSelectedItem()));
+			String last = this.sub.getText();
+			try {
+				this.c.setParam((SubType) this.subType.getSelectedItem(), this.sub.getText());
+				this.message.setText(this.c.decrypt(this.message.getText(), (SubType) this.subType.getSelectedItem()));
+			} catch (IllegalArgumentException ex) {
+				JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				this.sub.setText(last);
+			}
 		} else if (e.getSource() == this.subType) {
 			SubType type = (SubType) this.subType.getSelectedItem();
 			if (type == this.lastSelected)
