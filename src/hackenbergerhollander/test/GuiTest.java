@@ -33,7 +33,7 @@ public class GuiTest {
 		c.view.sub.setText("kryptos");
 		c.view.message.setText("Hallo Welt!");
 		c.view.encrypt.doClick();
-		assertEquals("jcnnq ygnv!", c.view.message.getText());
+		assertEquals("akeeh vten!", c.view.message.getText());
 		c.view.decrypt.doClick();
 		assertEquals("hallo welt!", c.view.message.getText());
 	}
