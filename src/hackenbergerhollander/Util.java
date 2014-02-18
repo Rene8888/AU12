@@ -142,4 +142,21 @@ public class Util {
 		}
 	}
 
+	/**
+	 * Checks if all chars are in the alphabet
+	 * 
+	 * @param chars
+	 *            chars to check
+	 * @return true if the alphabet is only containing chars from the standart
+	 *         alphabet
+	 */
+	public static boolean areInAlphabet(char[] chars) {
+		for (char c : chars) {
+			if (!Util.isInAlphabet(c)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 }
