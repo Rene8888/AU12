@@ -22,136 +22,115 @@ import javax.swing.JTextField;
  * 
  * @author Hackenberger Christoph
  */
-public class View extends JPanel {
+public class View extends JPanel implements ActionListener, FocusListener {
 
 	private static final long serialVersionUID = 2954587672137426890L;
-	
+
 	private Control c;
 	private JFrame f;
 	private JTextField sub;
 	private JLabel subText;
 	private JComboBox<SubType> subType;
-	
+
 	private SubType lastSelected = SubType.SUBST;
-	
+
 	private JTextArea message;
 	private JButton encrypt;
 	private JButton decrypt;
-	
+
+	private String last;
+
 	/**
 	 * Creates a new View Frame
 	 * 
-	 * @param c instance of control
+	 * @param c
+	 *            instance of control
 	 */
 	public View(Control c) {
 		this.c = c;
-		f = new JFrame("MonoAlphabeticCipher");
-		f.setSize(400, 280);
-		f.setResizable(false);
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.add(this);
-		init();
-		f.setVisible(true);
+		this.f = new JFrame("MonoAlphabeticCipher");
+		this.f.setSize(400, 280);
+		this.f.setResizable(false);
+		this.f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.f.add(this);
+		this.init();
+		this.f.setVisible(true);
 	}
-	
+
 	private void init() {
-		
 		this.setLayout(new BorderLayout());
-		
+
 		JPanel north = new JPanel(new GridLayout(2, 1));
 		JPanel upper_n = new JPanel();
 		JPanel lower_n = new JPanel();
 		north.add(upper_n);
 		north.add(lower_n);
-		
+
 		JLabel typeTxt = new JLabel("Type");
-		subType = new JComboBox<SubType>(SubType.values());
-		subType.addActionListener(new ComboBoxListener());
+		this.subType = new JComboBox<SubType>(SubType.values());
+		this.subType.addActionListener(this);
 		upper_n.add(typeTxt);
 		upper_n.add(subType);
-		
-		subText = new JLabel(((SubType)subType.getSelectedItem()).getTxt());
-		sub = new JTextField(20);
-		sub.addFocusListener(new FocusListener() {
-			
-			private String last;
-			
-			@Override
-			public void focusLost(FocusEvent e) {
-				try{
-					c.setParam((SubType)subType.getSelectedItem(), sub.getText());
-				}catch (IllegalArgumentException ex) {
-					JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-					sub.setText(last);
-				}
-			}
-			
-			@Override
-			public void focusGained(FocusEvent e) {
-				last = sub.getText();
-			}
-		});
-		lower_n.add(subText);
-		lower_n.add(sub);
-		
-		JPanel center = new JPanel(new GridLayout(2,1));
+
+		this.subText = new JLabel(((SubType) this.subType.getSelectedItem()).getTxt());
+		this.sub = new JTextField(20);
+		this.sub.addFocusListener(this);
+		lower_n.add(this.subText);
+		lower_n.add(this.sub);
+
+		JPanel center = new JPanel(new GridLayout(2, 1));
 		JPanel upper_c = new JPanel();
-		JPanel lower_c = new JPanel(new GridLayout(1,2));
+		JPanel lower_c = new JPanel(new GridLayout(1, 2));
 		JPanel left_lc = new JPanel();
 		JPanel right_lc = new JPanel();
 		lower_c.add(left_lc);
 		lower_c.add(right_lc);
 		center.add(upper_c);
 		center.add(lower_c);
-		
-		message = new JTextArea(5, 30);
-		JScrollPane pane = new JScrollPane(message);
+
+		this.message = new JTextArea(5, 30);
+		JScrollPane pane = new JScrollPane(this.message);
 		upper_c.add(pane);
-		
-		encrypt = new JButton("Encrypt");
-		decrypt = new JButton("Decrypt");
-		encrypt.setActionCommand("ec");
-		decrypt.setActionCommand("dc");
-		
-		ButtonListener bl = new ButtonListener();
-		encrypt.addActionListener(bl);
-		decrypt.addActionListener(bl);
-		
-		left_lc.add(encrypt);
-		right_lc.add(decrypt);
-		
-		this.add(north,BorderLayout.NORTH);
-		this.add(center,BorderLayout.CENTER);
+
+		this.encrypt = new JButton("Encrypt");
+		this.decrypt = new JButton("Decrypt");
+
+		this.encrypt.addActionListener(this);
+		this.decrypt.addActionListener(this);
+
+		left_lc.add(this.encrypt);
+		right_lc.add(this.decrypt);
+
+		this.add(north, BorderLayout.NORTH);
+		this.add(center, BorderLayout.CENTER);
 	}
-	
-	private class ComboBoxListener implements ActionListener {
-		
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			Object o = e.getSource();
-			if(!(o instanceof JComboBox<?>))
-				return;
-			@SuppressWarnings("unchecked")
-			JComboBox<SubType> box = (JComboBox<SubType>) o;
-			SubType type = (SubType) box.getSelectedItem();
-			if(type == lastSelected)
-				return;
-			lastSelected = type;
-			subText.setText(type.getTxt());
-			sub.setColumns(type.getCol());
-			sub.setText("");
+
+	public void focusGained(FocusEvent e) {
+		this.last = this.sub.getText();
+	}
+
+	public void focusLost(FocusEvent e) {
+		try {
+			this.c.setParam((SubType) this.subType.getSelectedItem(), this.sub.getText());
+		} catch (IllegalArgumentException ex) {
+			JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			this.sub.setText(this.last);
 		}
 	}
-	
-	private class ButtonListener implements ActionListener {
-		
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			String cmd = e.getActionCommand();
-			if(cmd.equals("ec"))
-				message.setText(c.encrypt(message.getText(), (SubType)subType.getSelectedItem()));
-			else if(cmd.equals("dc"))
-				message.setText(c.decrypt(message.getText(), (SubType)subType.getSelectedItem()));
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == this.encrypt) {
+			this.message.setText(this.c.encrypt(this.message.getText(), (SubType) this.subType.getSelectedItem()));
+		} else if (e.getSource() == this.decrypt) {
+			this.message.setText(this.c.decrypt(this.message.getText(), (SubType) this.subType.getSelectedItem()));
+		} else if (e.getSource() == this.subType) {
+			SubType type = (SubType) this.subType.getSelectedItem();
+			if (type == this.lastSelected)
+				return;
+			this.lastSelected = type;
+			this.subText.setText(type.getTxt());
+			this.sub.setColumns(type.getCol());
+			this.sub.setText("");
 		}
 	}
 }
