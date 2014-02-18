@@ -15,7 +15,7 @@ public class KeywordCipher extends MonoalphabeticCipher {
 	 * @param keyWord
 	 *            Keyword
 	 */
-	public KeywordCipher(String keyWord) {
+	public KeywordCipher(String keyWord) throws IllegalArgumentException{
 		super();
 		this.setKeyword(keyWord);
 	}
@@ -26,7 +26,9 @@ public class KeywordCipher extends MonoalphabeticCipher {
 	 * @param keyWord
 	 *            Keyword
 	 */
-	public void setKeyword(String keyWord) {
+	public void setKeyword(String keyWord) throws IllegalArgumentException {
+		if(!Util.areInAlphabet(keyWord.toCharArray()))
+			throw new IllegalArgumentException("The keyword has to contain only chars from a to z and äöüß");
 		this.keyWord = keyWord;
 		super.setSecretAlphabet(this.generateAlphabet(this.keyWord));
 	}
