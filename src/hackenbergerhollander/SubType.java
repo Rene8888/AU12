@@ -1,5 +1,7 @@
 package hackenbergerhollander;
 
+import java.util.regex.Pattern;
+
 /**
  * Represents the 3 different types of the monoalphabetic Cipher
  * 
@@ -10,30 +12,32 @@ public enum SubType {
 	/**
 	 * Shift Cipher
 	 */
-	SHIFT(new ShiftCipher(0), "Shifter", "Shift", 2),
+	SHIFT(new ShiftCipher(0), "^[0-9]{1,2}$", "Shifter", "Shift", 2),
 
 	/**
 	 * Keyword Chipher
 	 */
-	KEY(new KeywordCipher(null), "Keyword", "Keyword", 8),
+	KEY(new KeywordCipher(null), "^[" + new String(Util.getAlphabet()) + "]{1," + Util.getAlphabetLength() + "}$", "Keyword", "Keyword", 8),
 
 	/**
 	 * Substitution Cipher
 	 */
-	SUBST(new SubstitutionCipher(Util.getAlphabet()), "Substitution", "Alphabet", 20),
+	SUBST(new SubstitutionCipher(Util.getAlphabet()), "^[" + new String(Util.getAlphabet()) + "]{1," + Util.getAlphabetLength() + "}$", "Substitution", "Alphabet", 20),
 
 	/**
 	 * Extended Keyword Cipher
 	 */
-	EXTENDED(new ExtendedKeywordCipher(null), "Extended Keyword", "Keyword", 8);
+	EXTENDED(new ExtendedKeywordCipher(null), ".*", "Extended Keyword", "Keyword", 8);
 
 	private final Cipher cipher;
+	private final Pattern pattern;
 	private final String title;
 	private final String txt;
 	private final int col;
 
-	private SubType(Cipher cipher, String title, String txt, int col) {
+	private SubType(Cipher cipher, String regex, String title, String txt, int col) {
 		this.cipher = cipher;
+		this.pattern = Pattern.compile(regex);
 		this.title = title;
 		this.txt = txt;
 		this.col = col;
@@ -69,6 +73,15 @@ public enum SubType {
 	 */
 	public Cipher getCipher() {
 		return this.cipher;
+	}
+
+	/**
+	 * Gets the regex pattern
+	 * 
+	 * @return regex pattern
+	 */
+	public Pattern getPattern() {
+		return this.pattern;
 	}
 
 }

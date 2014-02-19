@@ -18,7 +18,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 /**
  * View part of the MVC for our GUI
@@ -35,7 +34,7 @@ public class View extends JPanel implements ActionListener {
 	private Control c;
 	private JFrame f;
 
-	public JTextField sub;
+	public RegexTextField sub;
 	public JLabel subText;
 	public JComboBox<SubType> subType;
 
@@ -83,8 +82,9 @@ public class View extends JPanel implements ActionListener {
 		this.subType.addActionListener(this);
 		north.add(this.subType);
 
-		this.subText = new JLabel(((SubType) this.subType.getSelectedItem()).getTxt());
-		this.sub = new JTextField(((SubType) this.subType.getSelectedItem()).getCol());
+		SubType type = (SubType) this.subType.getSelectedItem();
+		this.subText = new JLabel(type.getTxt());
+		this.sub = new RegexTextField(type.getPattern(), "", type.getCol());
 		north.add(new JLabel("     "));
 		north.add(this.subText);
 		north.add(this.sub);
@@ -149,13 +149,15 @@ public class View extends JPanel implements ActionListener {
 			if (type == this.lastSelected)
 				return;
 			this.lastSelected = type;
-			this.subText.setText(type.getTxt());
-			this.sub.setColumns(type.getCol());
 			this.sub.setText("");
+			this.sub.setColumns(type.getCol());
+			this.sub.setPattern(type.getPattern());
+			this.subText.setText(type.getTxt());
 		} else if (e.getSource() == this.paste) {
 			// the current clipboard content is loaded
 			Transferable trans = this.cb.getContents(null);
-			// iterate trough the different meta infos from the content, to find the String one
+			// iterate trough the different meta infos from the content, to find
+			// the String one
 			for (DataFlavor data : trans.getTransferDataFlavors()) {
 				try {
 					Object text = trans.getTransferData(data);
@@ -168,7 +170,7 @@ public class View extends JPanel implements ActionListener {
 		} else if (e.getSource() == this.copy) {
 			StringSelection selection = new StringSelection(this.message.getText());
 			// add the String from the message area to the clipboard
-		    this.cb.setContents(selection, selection);
+			this.cb.setContents(selection, selection);
 		}
 	}
 }
