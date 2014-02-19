@@ -81,7 +81,7 @@ public class CipherTest {
 	public void testSetSecretAlphabetSubstitutionCipher3() {
 		new SubstitutionCipher("abc");
 	}
-	
+
 	@Test
 	public void testSubstitutionCipherSetParameter() {
 		SubstitutionCipher c = new SubstitutionCipher("abcdefghijklmnopqrstuvwxyzäöüß");
@@ -98,15 +98,15 @@ public class CipherTest {
 	public void testShiftCipherConstructor2() {
 		assertArrayEquals("ghijklmnopqrstuvwxyzäöüßabcdef".toCharArray(), new ShiftCipher(6).getSecretAlphabet());
 	}
-	
+
 	@Test
 	public void testShiftCipherSetParameter1() {
 		ShiftCipher c = new ShiftCipher(0);
 		c.setParameter("5");
 		assertArrayEquals("fghijklmnopqrstuvwxyzäöüßabcde".toCharArray(), c.getSecretAlphabet());
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
+
+	@Test(expected = IllegalArgumentException.class)
 	public void testShiftCipherSetParameter2() {
 		ShiftCipher c = new ShiftCipher(0);
 		c.setParameter("2a");
@@ -117,11 +117,11 @@ public class CipherTest {
 		assertArrayEquals("REGNSCHIMABDFJKLOPQTUVWXYZÄÖÜß".toLowerCase().toCharArray(), new KeywordCipher("Regenschirm").getSecretAlphabet());
 	}
 
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testKeywordCipherConstructor2() {
 		new KeywordCipher("Regenschirm!");
 	}
-	
+
 	@Test
 	public void testKeywordCipherSetParameter() {
 		KeywordCipher c = new KeywordCipher("");

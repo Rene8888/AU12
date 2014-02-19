@@ -121,7 +121,8 @@ public class Util {
 	}
 
 	/**
-	 * Checks if the alphabet is valid (only contains chars from a to z and äöüß, exactly 30 chars)
+	 * Checks if the alphabet is valid (only contains chars from a to z and
+	 * äöüß, exactly 30 chars)
 	 * 
 	 * @param alphabet
 	 *            alphabet to check

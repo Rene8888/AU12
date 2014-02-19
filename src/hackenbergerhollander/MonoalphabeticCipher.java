@@ -77,7 +77,7 @@ public class MonoalphabeticCipher implements Cipher {
 	}
 
 	private int getCharPositionInSecretAlphabet(char c) {
-		//  returns the position of the char in the secret alphabet
+		// returns the position of the char in the secret alphabet
 		if (this.isInSecretAlphabet(c)) {
 			for (int i = 0; i < this.secretAlphabet.length; i++) {
 				if (this.secretAlphabet[i] == c) {

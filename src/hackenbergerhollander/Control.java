@@ -6,8 +6,8 @@ package hackenbergerhollander;
  * @author Hackenberger Christoph
  * 
  */
-//Nur um die Warnings bei den public attributen zu unterdrücken, da diese zum
-//testen public sein müssen
+// Nur um die Warnings bei den public attributen zu unterdrücken, da diese zum
+// testen public sein müssen
 @SuppressWarnings("javadoc")
 public class Control {
 

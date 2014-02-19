@@ -55,19 +55,20 @@ public class KeywordCipher extends MonoalphabeticCipher {
 		// the linkedhashset uses the order in which the chars got added
 		// no char can occour more than once
 		LinkedHashSet<Character> set = new LinkedHashSet<Character>();
-		
+
 		// adds the chars from the keyword
 		for (char c : keyword.toLowerCase().toCharArray()) {
 			set.add(c);
 		}
-		
+
 		// adds the chars from the alphabet
 		for (char c : Util.getAlphabet()) {
 			set.add(c);
 		}
-		
-		// at this point every char only occours once and all from the standart alphabet are supplied
-		
+
+		// at this point every char only occours once and all from the standart
+		// alphabet are supplied
+
 		// puts it back into an char[]
 		int i = 0;
 		char[] chars = new char[set.size()];
