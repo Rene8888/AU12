@@ -8,11 +8,6 @@ package hackenbergerhollander;
 public enum SubType {
 
 	/**
-	 * Substitution Cipher
-	 */
-	SUBST(new SubstitutionCipher(Util.getAlphabet()), "Substitution", "Alphabet", 20),
-
-	/**
 	 * Shift Cipher
 	 */
 	SHIFT(new ShiftCipher(0), "Shifter", "Shift", 2),
@@ -20,7 +15,17 @@ public enum SubType {
 	/**
 	 * Keyword Chipher
 	 */
-	KEY(new KeywordCipher("kryptos"), "Keyword", "Keyword", 8);
+	KEY(new KeywordCipher("kryptos"), "Keyword", "Keyword", 8),
+
+	/**
+	 * Substitution Cipher
+	 */
+	SUBST(new SubstitutionCipher(Util.getAlphabet()), "Substitution", "Alphabet", 20),
+
+	/**
+	 * Extended Keyword Cipher
+	 */
+	EXTENDED(new ExtendedKeywordCipher("kryptos"), "Extended Keyword", "Keyword", 8);
 
 	private final Cipher cipher;
 	private final String title;

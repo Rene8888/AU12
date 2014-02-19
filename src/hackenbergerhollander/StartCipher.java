@@ -1,5 +1,7 @@
 package hackenbergerhollander;
 
+import javax.swing.UIManager;
+
 /**
  * Main Class
  * 
@@ -14,6 +16,11 @@ public class StartCipher {
 	 *            Command Line arguments
 	 */
 	public static void main(String[] args) {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		new Control();
 	}
 
