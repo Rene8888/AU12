@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,6 +45,9 @@ public class View extends JPanel implements ActionListener {
 	public JButton encrypt;
 	public JButton decrypt;
 	public JButton paste;
+	public JButton copy;
+
+	private Clipboard cb;
 
 	/**
 	 * Creates a new View Frame
@@ -53,7 +57,8 @@ public class View extends JPanel implements ActionListener {
 	 */
 	public View(Control c) {
 		this.c = c;
-		this.f = new JFrame("MonoAlphabeticCipher");
+		this.cb = Toolkit.getDefaultToolkit().getSystemClipboard();
+		this.f = new JFrame("Cipher");
 		this.f.setMinimumSize(new Dimension(600, 500));
 		this.f.setSize(new Dimension(600, 500));
 		this.f.setResizable(true);
@@ -68,7 +73,7 @@ public class View extends JPanel implements ActionListener {
 		this.setLayout(new BorderLayout());
 
 		JPanel north = new JPanel();
-		JPanel south = new JPanel();
+		JPanel south = new JPanel(new BorderLayout());
 
 		north.add(new JLabel("Type"));
 		this.subType = new JComboBox<SubType>(SubType.values());
@@ -76,7 +81,7 @@ public class View extends JPanel implements ActionListener {
 		north.add(this.subType);
 
 		this.subText = new JLabel(((SubType) this.subType.getSelectedItem()).getTxt());
-		this.sub = new JTextField(((SubType)this.subType.getSelectedItem()).getCol());
+		this.sub = new JTextField(((SubType) this.subType.getSelectedItem()).getCol());
 		north.add(new JLabel("     "));
 		north.add(this.subText);
 		north.add(this.sub);
@@ -91,15 +96,26 @@ public class View extends JPanel implements ActionListener {
 		this.encrypt = new JButton("Encrypt");
 		this.decrypt = new JButton("Decrypt");
 		this.paste = new JButton("Paste");
+		this.copy = new JButton("Copy");
 
 		this.encrypt.addActionListener(this);
 		this.decrypt.addActionListener(this);
 		this.paste.addActionListener(this);
+		this.copy.addActionListener(this);
 
-		south.add(this.paste);
-		south.add(this.encrypt);
-		south.add(this.decrypt);
-		
+		JPanel southwest = new JPanel();
+		southwest.add(this.paste);
+		south.add(southwest, BorderLayout.WEST);
+
+		JPanel southcenter = new JPanel();
+		southcenter.add(this.encrypt);
+		southcenter.add(this.decrypt);
+		south.add(southcenter, BorderLayout.CENTER);
+
+		JPanel southeast = new JPanel();
+		southeast.add(this.copy);
+		south.add(southeast, BorderLayout.EAST);
+
 		this.add(north, BorderLayout.NORTH);
 		this.add(south, BorderLayout.SOUTH);
 	}
@@ -134,17 +150,19 @@ public class View extends JPanel implements ActionListener {
 			this.sub.setColumns(type.getCol());
 			this.sub.setText("");
 		} else if (e.getSource() == this.paste) {
-			Clipboard cb = Toolkit.getDefaultToolkit().getSystemClipboard();
-			Transferable trans = cb.getContents(null);
-			for(DataFlavor data : trans.getTransferDataFlavors()) {
+			Transferable trans = this.cb.getContents(null);
+			for (DataFlavor data : trans.getTransferDataFlavors()) {
 				try {
 					Object text = trans.getTransferData(data);
-					if(text instanceof String)
-						this.message.append((String)text);
+					if (text instanceof String)
+						this.message.append((String) text);
 				} catch (Exception ex) {
-					
+
 				}
 			}
+		} else if (e.getSource() == this.copy) {
+			StringSelection selection = new StringSelection(this.message.getText());
+		    this.cb.setContents(selection, selection);
 		}
 	}
 }
