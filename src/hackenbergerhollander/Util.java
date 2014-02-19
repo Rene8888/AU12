@@ -21,10 +21,10 @@ public class Util {
 		for (int i = 'a'; i <= 'z'; i++) {
 			ALPHABET[i - 'a'] = (char) i;
 		}
-		ALPHABET[26] = 'ä';
-		ALPHABET[27] = 'ö';
-		ALPHABET[28] = 'ü';
-		ALPHABET[29] = 'ß';
+		ALPHABET[26] = 228;
+		ALPHABET[27] = 246;
+		ALPHABET[28] = 252;
+		ALPHABET[29] = 223;
 	}
 
 	/**
