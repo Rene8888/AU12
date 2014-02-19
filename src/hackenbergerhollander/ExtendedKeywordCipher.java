@@ -90,8 +90,6 @@ public class ExtendedKeywordCipher extends MonoalphabeticCipher {
 				chars[i] = al.get(i);
 			}
 
-			System.out.println(new String(chars));
-
 			return chars;
 
 		} catch (Exception e) {

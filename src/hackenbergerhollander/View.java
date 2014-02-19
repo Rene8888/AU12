@@ -34,7 +34,7 @@ public class View extends JPanel implements ActionListener {
 	public JLabel subText;
 	public JComboBox<SubType> subType;
 
-	public SubType lastSelected = SubType.SUBST;
+	public SubType lastSelected = SubType.values()[0];
 
 	public JTextArea message;
 	public JButton encrypt;
@@ -49,8 +49,8 @@ public class View extends JPanel implements ActionListener {
 	public View(Control c) {
 		this.c = c;
 		this.f = new JFrame("MonoAlphabeticCipher");
-		this.f.setMinimumSize(new Dimension(500, 400));
-		this.f.setSize(new Dimension(500, 400));
+		this.f.setMinimumSize(new Dimension(600, 500));
+		this.f.setSize(new Dimension(600, 500));
 		this.f.setResizable(true);
 		this.f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.f.setLocationRelativeTo(null);
@@ -65,16 +65,13 @@ public class View extends JPanel implements ActionListener {
 		JPanel north = new JPanel();
 		JPanel south = new JPanel();
 
-		this.add(north, BorderLayout.NORTH);
-		this.add(south, BorderLayout.SOUTH);
-
 		north.add(new JLabel("Type"));
 		this.subType = new JComboBox<SubType>(SubType.values());
 		this.subType.addActionListener(this);
 		north.add(this.subType);
 
 		this.subText = new JLabel(((SubType) this.subType.getSelectedItem()).getTxt());
-		this.sub = new JTextField(20);
+		this.sub = new JTextField(((SubType)this.subType.getSelectedItem()).getCol());
 		north.add(new JLabel("     "));
 		north.add(this.subText);
 		north.add(this.sub);
@@ -94,6 +91,9 @@ public class View extends JPanel implements ActionListener {
 
 		south.add(this.encrypt);
 		south.add(this.decrypt);
+		
+		this.add(north, BorderLayout.NORTH);
+		this.add(south, BorderLayout.SOUTH);
 	}
 
 	public void actionPerformed(ActionEvent e) {
