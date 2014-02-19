@@ -24,7 +24,7 @@ public class ExtendedKeywordCipher extends MonoalphabeticCipher {
 	public ExtendedKeywordCipher(String keyWord) {
 		super();
 		try {
-			// Creates a new Message Digest instance
+			// Creates a new sha512 hasher
 			this.sha512 = MessageDigest.getInstance("SHA-512");
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
@@ -51,7 +51,8 @@ public class ExtendedKeywordCipher extends MonoalphabeticCipher {
 	 * @return Returns a alphabet
 	 */
 	public char[] generateAlphabet(String keyword) {
-		if(keyword == null || keyword.equals(""))
+		// gives back the standart alphabet if no keyword is supplied
+		if (keyword == null || keyword.equals(""))
 			return Util.getAlphabet();
 		try {
 			// Hashes the keyword
@@ -59,6 +60,8 @@ public class ExtendedKeywordCipher extends MonoalphabeticCipher {
 
 			ArrayList<Character> al = new ArrayList<Character>();
 
+			// goes through all bytes from the hash and tries to combine them as
+			// long as a full alphabet is generated
 			for (byte b1 : mdbytes) {
 				if (al.size() >= Util.getAlphabetLength())
 					break;
@@ -74,6 +77,8 @@ public class ExtendedKeywordCipher extends MonoalphabeticCipher {
 							for (byte b5 : mdbytes) {
 								if (al.size() >= Util.getAlphabetLength())
 									break;
+								// sums all the bytes and minimizes to get the
+								// char in the alphabet
 								int i = b1 + b2 + b3 + b4 + b5;
 								char c = Util.getCharFromAlphabet(Util.minimizeInt(i, Util.getAlphabetLength()));
 								if (al.contains(c)) {
@@ -87,6 +92,7 @@ public class ExtendedKeywordCipher extends MonoalphabeticCipher {
 				}
 			}
 
+			// fills the arraylist into a char array to return it
 			char[] chars = new char[al.size()];
 			for (int i = 0; i < chars.length; i++) {
 				chars[i] = al.get(i);
@@ -96,7 +102,7 @@ public class ExtendedKeywordCipher extends MonoalphabeticCipher {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return null;
+			return Util.getAlphabet();
 		}
 	}
 

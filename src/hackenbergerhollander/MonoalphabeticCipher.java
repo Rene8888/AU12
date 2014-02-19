@@ -50,6 +50,9 @@ public class MonoalphabeticCipher implements Cipher {
 
 	public String encrypt(String in) {
 		char[] input = in.toLowerCase().toCharArray();
+
+		// we loop through every char and replace it by the one representing it
+		// in the secret alphabet
 		for (int i = 0; i < input.length; i++) {
 			int pos = Util.getCharPositionInAlphabet(input[i]);
 			if (pos != -1) {
@@ -61,6 +64,9 @@ public class MonoalphabeticCipher implements Cipher {
 
 	public String decrypt(String in) {
 		char[] input = in.toLowerCase().toCharArray();
+
+		// we loop through every char and replace it with the corresponding char
+		// in the standart alphabet
 		for (int i = 0; i < input.length; i++) {
 			int pos = this.getCharPositionInSecretAlphabet(input[i]);
 			if (pos != -1) {
@@ -71,6 +77,7 @@ public class MonoalphabeticCipher implements Cipher {
 	}
 
 	private int getCharPositionInSecretAlphabet(char c) {
+		//  returns the position of the char in the secret alphabet
 		if (this.isInSecretAlphabet(c)) {
 			for (int i = 0; i < this.secretAlphabet.length; i++) {
 				if (this.secretAlphabet[i] == c) {
@@ -84,6 +91,7 @@ public class MonoalphabeticCipher implements Cipher {
 	}
 
 	private boolean isInSecretAlphabet(char in) {
+		// checks if the char is in the secret alphabet
 		for (char c : this.secretAlphabet) {
 			if (in == c) {
 				return true;

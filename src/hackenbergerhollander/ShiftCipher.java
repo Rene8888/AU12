@@ -40,6 +40,7 @@ public class ShiftCipher extends MonoalphabeticCipher {
 	 */
 	public char[] generateAlphabet(int shiftValue) {
 		char[] out = new char[Util.getAlphabetLength()];
+		// we loop through every char in the alphabet and adds the shift amount and gets that from that location
 		for (int i = 0; i < out.length; i++) {
 			out[i] = Util.getCharFromAlphabet(Util.minimizeInt(i + this.shiftValue, Util.getAlphabetLength()));
 		}

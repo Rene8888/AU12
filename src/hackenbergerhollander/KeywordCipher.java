@@ -33,7 +33,7 @@ public class KeywordCipher extends MonoalphabeticCipher {
 	 *             if the keyword is invalid
 	 */
 	public void setKeyword(String keyWord) throws IllegalArgumentException {
-		if(keyWord == null || keyWord.equals("")) {
+		if (keyWord == null || keyWord.equals("")) {
 			super.setSecretAlphabet(Util.getAlphabet());
 			return;
 		}
@@ -51,13 +51,24 @@ public class KeywordCipher extends MonoalphabeticCipher {
 	 * @return Returns a alphabet
 	 */
 	public char[] generateAlphabet(String keyword) {
+		// the linked hash set is used to store all the chars
+		// the linkedhashset uses the order in which the chars got added
+		// no char can occour more than once
 		LinkedHashSet<Character> set = new LinkedHashSet<Character>();
+		
+		// adds the chars from the keyword
 		for (char c : keyword.toLowerCase().toCharArray()) {
 			set.add(c);
 		}
+		
+		// adds the chars from the alphabet
 		for (char c : Util.getAlphabet()) {
 			set.add(c);
 		}
+		
+		// at this point every char only occours once and all from the standart alphabet are supplied
+		
+		// puts it back into an char[]
 		int i = 0;
 		char[] chars = new char[set.size()];
 		for (char c : set) {
