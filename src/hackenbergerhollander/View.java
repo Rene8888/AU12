@@ -39,6 +39,7 @@ public class View extends JPanel implements ActionListener {
 	public JLabel subText;
 	public JComboBox<SubType> subType;
 
+	// the SubType which is loaded on startup is set here as lastSelection
 	public SubType lastSelected = SubType.values()[0];
 
 	public JTextArea message;
@@ -47,6 +48,7 @@ public class View extends JPanel implements ActionListener {
 	public JButton paste;
 	public JButton copy;
 
+	// Clipboard for copy & paste function
 	private Clipboard cb;
 
 	/**
@@ -57,6 +59,7 @@ public class View extends JPanel implements ActionListener {
 	 */
 	public View(Control c) {
 		this.c = c;
+		// system clipboard is loaded
 		this.cb = Toolkit.getDefaultToolkit().getSystemClipboard();
 		this.f = new JFrame("Cipher");
 		this.f.setMinimumSize(new Dimension(600, 500));
@@ -150,7 +153,9 @@ public class View extends JPanel implements ActionListener {
 			this.sub.setColumns(type.getCol());
 			this.sub.setText("");
 		} else if (e.getSource() == this.paste) {
+			// the current clipboard content is loaded
 			Transferable trans = this.cb.getContents(null);
+			// iterate trough the different meta infos from the content, to find the String one
 			for (DataFlavor data : trans.getTransferDataFlavors()) {
 				try {
 					Object text = trans.getTransferData(data);
@@ -162,6 +167,7 @@ public class View extends JPanel implements ActionListener {
 			}
 		} else if (e.getSource() == this.copy) {
 			StringSelection selection = new StringSelection(this.message.getText());
+			// add the String from the message area to the clipboard
 		    this.cb.setContents(selection, selection);
 		}
 	}

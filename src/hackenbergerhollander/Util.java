@@ -21,9 +21,13 @@ public class Util {
 		for (int i = 'a'; i <= 'z'; i++) {
 			ALPHABET[i - 'a'] = (char) i;
 		}
+		// represents ä
 		ALPHABET[26] = 228;
+		// represents ö
 		ALPHABET[27] = 246;
+		// represents ü
 		ALPHABET[28] = 252;
+		// represents ß
 		ALPHABET[29] = 223;
 	}
 
@@ -117,7 +121,7 @@ public class Util {
 	}
 
 	/**
-	 * Checks if the alphabet is valid
+	 * Checks if the alphabet is valid (only contains chars from a to z and äöüß, exactly 30 chars)
 	 * 
 	 * @param alphabet
 	 *            alphabet to check
