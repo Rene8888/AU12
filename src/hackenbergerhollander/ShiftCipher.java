@@ -46,7 +46,8 @@ public class ShiftCipher extends MonoalphabeticCipher {
 		return out;
 	}
 
-	public boolean setParameter(String in) throws Exception {
+	@Override
+	public boolean setParameter(String in) throws IllegalArgumentException {
 		try {
 			this.setShiftAmount(Math.abs(Integer.parseInt(in)));
 			return true;

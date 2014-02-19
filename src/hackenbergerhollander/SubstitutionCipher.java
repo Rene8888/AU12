@@ -55,7 +55,8 @@ public class SubstitutionCipher extends MonoalphabeticCipher {
 		this.setSecretAlphabet(secretAlphabet.toCharArray());
 	}
 
-	public boolean setParameter(String in) throws Exception {
+	@Override
+	public boolean setParameter(String in) throws IllegalArgumentException {
 		this.setSecretAlphabet(in);
 		return true;
 	}

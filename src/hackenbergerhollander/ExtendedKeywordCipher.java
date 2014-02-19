@@ -98,6 +98,7 @@ public class ExtendedKeywordCipher extends MonoalphabeticCipher {
 		}
 	}
 
+	@Override
 	public boolean setParameter(String in) {
 		this.setKeyword(in);
 		return true;

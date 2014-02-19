@@ -67,7 +67,8 @@ public class KeywordCipher extends MonoalphabeticCipher {
 		return chars;
 	}
 
-	public boolean setParameter(String in) throws Exception {
+	@Override
+	public boolean setParameter(String in) throws IllegalArgumentException {
 		this.setKeyword(in);
 		return true;
 	}

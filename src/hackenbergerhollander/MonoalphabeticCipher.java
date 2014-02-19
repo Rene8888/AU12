@@ -92,7 +92,7 @@ public class MonoalphabeticCipher implements Cipher {
 		return false;
 	}
 
-	public boolean setParameter(String in) throws Exception {
+	public boolean setParameter(String in) {
 		this.parameter = in;
 		return true;
 	}
