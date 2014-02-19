@@ -17,7 +17,7 @@ public class StartCipher {
 	 */
 	public static void main(String[] args) {
 		try {
-			// makes the gui look better on windows systems
+			// makes the gui look better on for example windows systems
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) {
 			e.printStackTrace();
