@@ -2,6 +2,10 @@ package hackenbergerhollander;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -39,6 +43,7 @@ public class View extends JPanel implements ActionListener {
 	public JTextArea message;
 	public JButton encrypt;
 	public JButton decrypt;
+	public JButton paste;
 
 	/**
 	 * Creates a new View Frame
@@ -85,10 +90,13 @@ public class View extends JPanel implements ActionListener {
 
 		this.encrypt = new JButton("Encrypt");
 		this.decrypt = new JButton("Decrypt");
+		this.paste = new JButton("Paste");
 
 		this.encrypt.addActionListener(this);
 		this.decrypt.addActionListener(this);
+		this.paste.addActionListener(this);
 
+		south.add(this.paste);
 		south.add(this.encrypt);
 		south.add(this.decrypt);
 		
@@ -125,6 +133,18 @@ public class View extends JPanel implements ActionListener {
 			this.subText.setText(type.getTxt());
 			this.sub.setColumns(type.getCol());
 			this.sub.setText("");
+		} else if (e.getSource() == this.paste) {
+			Clipboard cb = Toolkit.getDefaultToolkit().getSystemClipboard();
+			Transferable trans = cb.getContents(null);
+			for(DataFlavor data : trans.getTransferDataFlavors()) {
+				try {
+					Object text = trans.getTransferData(data);
+					if(text instanceof String)
+						this.message.append((String)text);
+				} catch (Exception ex) {
+					
+				}
+			}
 		}
 	}
 }
