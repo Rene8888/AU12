@@ -62,4 +62,9 @@ public class KeywordCipher extends MonoalphabeticCipher {
 		}
 		return chars;
 	}
+
+	public boolean setParameter(String in) throws Exception {
+		this.setKeyword(in);
+		return true;
+	}
 }

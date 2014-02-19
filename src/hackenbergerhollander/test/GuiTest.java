@@ -16,12 +16,12 @@ import org.junit.Test;
 public class GuiTest {
 
 	private Control c;
-	
+
 	@Before
 	public void setup() {
 		c = new Control();
 	}
-	
+
 	@Test
 	public void testShiftEncrypt() throws InterruptedException {
 		c.view.subType.setSelectedItem(SubType.SHIFT);
@@ -31,7 +31,7 @@ public class GuiTest {
 		assertEquals("jcnnq ygnv!", c.view.message.getText());
 
 	}
-	
+
 	@Test
 	public void testShiftDecrypt() throws InterruptedException {
 		c.view.subType.setSelectedItem(SubType.SHIFT);
@@ -49,7 +49,7 @@ public class GuiTest {
 		c.view.encrypt.doClick();
 		assertEquals("akeeh vten!", c.view.message.getText());
 	}
-	
+
 	@Test
 	public void testKeywordDecrypt() throws InterruptedException {
 		c.view.subType.setSelectedItem(SubType.KEY);
@@ -67,7 +67,7 @@ public class GuiTest {
 		c.view.encrypt.doClick();
 		assertEquals("hrööb qnöl!", c.view.message.getText());
 	}
-	
+
 	@Test
 	public void testSubstitutionDecrypt() throws InterruptedException {
 		c.view.subType.setSelectedItem(SubType.SUBST);

@@ -109,7 +109,7 @@ public class View extends JPanel implements ActionListener {
 			try {
 				this.c.setParam((SubType) this.subType.getSelectedItem(), this.sub.getText());
 				this.message.setText(this.c.encrypt(this.message.getText(), (SubType) this.subType.getSelectedItem()));
-			} catch (IllegalArgumentException ex) {
+			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				this.sub.setText(last);
 			}
@@ -118,7 +118,7 @@ public class View extends JPanel implements ActionListener {
 			try {
 				this.c.setParam((SubType) this.subType.getSelectedItem(), this.sub.getText());
 				this.message.setText(this.c.decrypt(this.message.getText(), (SubType) this.subType.getSelectedItem()));
-			} catch (IllegalArgumentException ex) {
+			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				this.sub.setText(last);
 			}

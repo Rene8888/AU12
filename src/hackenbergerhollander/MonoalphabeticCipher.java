@@ -10,6 +10,8 @@ public class MonoalphabeticCipher implements Cipher {
 
 	private char[] secretAlphabet;
 
+	private String parameter;
+
 	/**
 	 * Creates a new Monoalphabetic Cipher
 	 */
@@ -35,6 +37,15 @@ public class MonoalphabeticCipher implements Cipher {
 	 */
 	public void setSecretAlphabet(char[] secretAlphabet) {
 		this.secretAlphabet = secretAlphabet;
+	}
+
+	/**
+	 * Gets the current parameter
+	 * 
+	 * @return the current param
+	 */
+	public String getParameter() {
+		return this.parameter;
 	}
 
 	public String encrypt(String in) {
@@ -79,5 +90,10 @@ public class MonoalphabeticCipher implements Cipher {
 			}
 		}
 		return false;
+	}
+
+	public boolean setParameter(String in) throws Exception {
+		this.parameter = in;
+		return true;
 	}
 }

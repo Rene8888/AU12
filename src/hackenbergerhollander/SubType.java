@@ -10,23 +10,25 @@ public enum SubType {
 	/**
 	 * Substitution Cipher
 	 */
-	SUBST("Substitution", "Alphabet", 20),
+	SUBST(new SubstitutionCipher(Util.getAlphabet()), "Substitution", "Alphabet", 20),
 
 	/**
 	 * Shift Cipher
 	 */
-	SHIFT("Shifter", "Shift", 2),
+	SHIFT(new ShiftCipher(0), "Shifter", "Shift", 2),
 
 	/**
 	 * Keyword Chipher
 	 */
-	KEY("Keyword", "Keyword", 8);
+	KEY(new KeywordCipher("kryptos"), "Keyword", "Keyword", 8);
 
+	private final Cipher cipher;
 	private final String title;
 	private final String txt;
 	private final int col;
 
-	private SubType(String title, String txt, int col) {
+	private SubType(Cipher cipher, String title, String txt, int col) {
+		this.cipher = cipher;
 		this.title = title;
 		this.txt = txt;
 		this.col = col;
@@ -54,4 +56,14 @@ public enum SubType {
 	public int getCol() {
 		return this.col;
 	}
+
+	/**
+	 * Gets the cipher from the current subtype
+	 * 
+	 * @return cipher
+	 */
+	public Cipher getCipher() {
+		return this.cipher;
+	}
+
 }

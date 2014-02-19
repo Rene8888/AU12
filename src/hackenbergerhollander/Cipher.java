@@ -25,4 +25,15 @@ public interface Cipher {
 	 */
 	public String decrypt(String in);
 
+	/**
+	 * Method to set the parameter, e.g. shift amount, keyword
+	 * 
+	 * @param in
+	 *            input text
+	 * @return true if successfully set the parameter
+	 * @throws Exception
+	 *             if an error occours when setting the parameter
+	 */
+	public boolean setParameter(String in) throws Exception;
+
 }

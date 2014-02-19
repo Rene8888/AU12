@@ -10,17 +10,11 @@ package hackenbergerhollander;
 public class Control {
 
 	public View view;
-	public ShiftCipher shifter;
-	public SubstitutionCipher subst;
-	public KeywordCipher key;
 
 	/**
 	 * Creates a new Control
 	 */
 	public Control() {
-		shifter = new ShiftCipher(0);
-		subst = new SubstitutionCipher(Util.getAlphabet());
-		key = new KeywordCipher("");
 		view = new View(this);
 	}
 
@@ -34,19 +28,7 @@ public class Control {
 	 * @return the encrypted text
 	 */
 	public String encrypt(String txt, SubType type) {
-		switch (type) {
-		case SUBST:
-			return subst.encrypt(txt);
-
-		case KEY:
-			return key.encrypt(txt);
-
-		case SHIFT:
-			return shifter.encrypt(txt);
-
-		default:
-			return null;
-		}
+		return type.getCipher().encrypt(txt);
 	}
 
 	/**
@@ -59,19 +41,7 @@ public class Control {
 	 * @return the decrypted text
 	 */
 	public String decrypt(String txt, SubType type) {
-		switch (type) {
-		case SUBST:
-			return subst.decrypt(txt);
-
-		case KEY:
-			return key.decrypt(txt);
-
-		case SHIFT:
-			return shifter.decrypt(txt);
-
-		default:
-			return null;
-		}
+		return type.getCipher().decrypt(txt);
 	}
 
 	/**
@@ -81,27 +51,9 @@ public class Control {
 	 *            type for which the parameter should be changed
 	 * @param param
 	 *            new parameter
-	 * @throws IllegalArgumentException
-	 *             when type is SubType.SHIFT and the param does not represents
-	 *             a number
+	 * @throws Exception
 	 */
-	public void setParam(SubType type, String param) throws IllegalArgumentException {
-		switch (type) {
-		case SUBST:
-			subst.setSecretAlphabet(param);
-			break;
-
-		case KEY:
-			key.setKeyword(param);
-			break;
-
-		case SHIFT:
-			try {
-				int shift = Math.abs(Integer.parseInt(param));
-				shifter.setShiftAmount(shift);
-			} catch (NumberFormatException e) {
-				throw new IllegalArgumentException("When type is Shifter the Parameter has to be a number");
-			}
-		}
+	public void setParam(SubType type, String param) throws Exception {
+		type.getCipher().setParameter(param);
 	}
 }

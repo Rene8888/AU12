@@ -97,4 +97,9 @@ public class ExtendedKeywordCipher extends MonoalphabeticCipher {
 			return null;
 		}
 	}
+
+	public boolean setParameter(String in) {
+		this.setKeyword(in);
+		return true;
+	}
 }
