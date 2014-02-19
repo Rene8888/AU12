@@ -15,7 +15,7 @@ public enum SubType {
 	/**
 	 * Keyword Chipher
 	 */
-	KEY(new KeywordCipher("kryptos"), "Keyword", "Keyword", 8),
+	KEY(new KeywordCipher(null), "Keyword", "Keyword", 8),
 
 	/**
 	 * Substitution Cipher
@@ -25,7 +25,7 @@ public enum SubType {
 	/**
 	 * Extended Keyword Cipher
 	 */
-	EXTENDED(new ExtendedKeywordCipher("kryptos"), "Extended Keyword", "Keyword", 8);
+	EXTENDED(new ExtendedKeywordCipher(null), "Extended Keyword", "Keyword", 8);
 
 	private final Cipher cipher;
 	private final String title;
