@@ -33,6 +33,10 @@ public class KeywordCipher extends MonoalphabeticCipher {
 	 *             if the keyword is invalid
 	 */
 	public void setKeyword(String keyWord) throws IllegalArgumentException {
+		if(keyWord == null || keyWord.equals("")) {
+			super.setSecretAlphabet(Util.getAlphabet());
+			return;
+		}
 		if (!Util.areInAlphabet(keyWord.toCharArray()))
 			throw new IllegalArgumentException("The keyword has to contain only chars from a to z and äöüß");
 		this.keyWord = keyWord;
