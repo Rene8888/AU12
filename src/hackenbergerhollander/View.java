@@ -1,7 +1,7 @@
 package hackenbergerhollander;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -20,6 +20,8 @@ import javax.swing.JTextField;
  * 
  * @author Hackenberger Christoph
  */
+// Nur um die Warnings bei den public attributen zu unterdrücken, da diese zum
+// testen public sein müssen
 @SuppressWarnings("javadoc")
 public class View extends JPanel implements ActionListener {
 
@@ -47,10 +49,12 @@ public class View extends JPanel implements ActionListener {
 	public View(Control c) {
 		this.c = c;
 		this.f = new JFrame("MonoAlphabeticCipher");
-		this.f.setSize(400, 280);
-		this.f.setResizable(false);
+		this.f.setMinimumSize(new Dimension(500, 400));
+		this.f.setSize(new Dimension(500, 400));
+		this.f.setResizable(true);
 		this.f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.f.add(this);
+		this.f.setLocationRelativeTo(null);
+		this.f.setContentPane(this);
 		this.init();
 		this.f.setVisible(true);
 	}
@@ -58,36 +62,29 @@ public class View extends JPanel implements ActionListener {
 	private void init() {
 		this.setLayout(new BorderLayout());
 
-		JPanel north = new JPanel(new GridLayout(2, 1));
-		JPanel upper_n = new JPanel();
-		JPanel lower_n = new JPanel();
-		north.add(upper_n);
-		north.add(lower_n);
+		JPanel north = new JPanel();
+		JPanel south = new JPanel();
 
-		JLabel typeTxt = new JLabel("Type");
+		this.add(north, BorderLayout.NORTH);
+		this.add(south, BorderLayout.SOUTH);
+
+		north.add(new JLabel("Type"));
 		this.subType = new JComboBox<SubType>(SubType.values());
 		this.subType.addActionListener(this);
-		upper_n.add(typeTxt);
-		upper_n.add(subType);
+		north.add(this.subType);
 
 		this.subText = new JLabel(((SubType) this.subType.getSelectedItem()).getTxt());
 		this.sub = new JTextField(20);
-		lower_n.add(this.subText);
-		lower_n.add(this.sub);
+		north.add(new JLabel("     "));
+		north.add(this.subText);
+		north.add(this.sub);
 
-		JPanel center = new JPanel(new GridLayout(2, 1));
-		JPanel upper_c = new JPanel();
-		JPanel lower_c = new JPanel(new GridLayout(1, 2));
-		JPanel left_lc = new JPanel();
-		JPanel right_lc = new JPanel();
-		lower_c.add(left_lc);
-		lower_c.add(right_lc);
-		center.add(upper_c);
-		center.add(lower_c);
-
-		this.message = new JTextArea(5, 30);
+		this.message = new JTextArea();
+		this.message.setLineWrap(true);
+		this.message.setWrapStyleWord(true);
 		JScrollPane pane = new JScrollPane(this.message);
-		upper_c.add(pane);
+		pane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		this.add(pane, BorderLayout.CENTER);
 
 		this.encrypt = new JButton("Encrypt");
 		this.decrypt = new JButton("Decrypt");
@@ -95,12 +92,8 @@ public class View extends JPanel implements ActionListener {
 		this.encrypt.addActionListener(this);
 		this.decrypt.addActionListener(this);
 
-		left_lc.add(this.encrypt);
-		right_lc.add(this.decrypt);
-
-		this.add(north, BorderLayout.NORTH);
-		this.add(center, BorderLayout.CENTER);
-
+		south.add(this.encrypt);
+		south.add(this.decrypt);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -110,6 +103,7 @@ public class View extends JPanel implements ActionListener {
 				this.c.setParam((SubType) this.subType.getSelectedItem(), this.sub.getText());
 				this.message.setText(this.c.encrypt(this.message.getText(), (SubType) this.subType.getSelectedItem()));
 			} catch (Exception ex) {
+				ex.printStackTrace();
 				JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				this.sub.setText(last);
 			}
@@ -119,6 +113,7 @@ public class View extends JPanel implements ActionListener {
 				this.c.setParam((SubType) this.subType.getSelectedItem(), this.sub.getText());
 				this.message.setText(this.c.decrypt(this.message.getText(), (SubType) this.subType.getSelectedItem()));
 			} catch (Exception ex) {
+				ex.printStackTrace();
 				JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				this.sub.setText(last);
 			}

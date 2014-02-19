@@ -58,19 +58,19 @@ public class ExtendedKeywordCipher extends MonoalphabeticCipher {
 			ArrayList<Character> al = new ArrayList<Character>();
 
 			for (byte b1 : mdbytes) {
-				if (al.size() >= 26)
+				if (al.size() >= Util.getAlphabetLength())
 					break;
 				for (byte b2 : mdbytes) {
-					if (al.size() >= 26)
+					if (al.size() >= Util.getAlphabetLength())
 						break;
 					for (byte b3 : mdbytes) {
-						if (al.size() >= 26)
+						if (al.size() >= Util.getAlphabetLength())
 							break;
 						for (byte b4 : mdbytes) {
-							if (al.size() >= 26)
+							if (al.size() >= Util.getAlphabetLength())
 								break;
 							for (byte b5 : mdbytes) {
-								if (al.size() >= 26)
+								if (al.size() >= Util.getAlphabetLength())
 									break;
 								int i = b1 + b2 + b3 + b4 + b5;
 								char c = Util.getCharFromAlphabet(Util.minimizeInt(i, Util.getAlphabetLength()));
@@ -89,6 +89,8 @@ public class ExtendedKeywordCipher extends MonoalphabeticCipher {
 			for (int i = 0; i < chars.length; i++) {
 				chars[i] = al.get(i);
 			}
+
+			System.out.println(new String(chars));
 
 			return chars;
 
