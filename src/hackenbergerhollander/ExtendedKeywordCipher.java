@@ -51,6 +51,8 @@ public class ExtendedKeywordCipher extends MonoalphabeticCipher {
 	 * @return Returns a alphabet
 	 */
 	public char[] generateAlphabet(String keyword) {
+		if(keyword == null || keyword.equals(""))
+			return Util.getAlphabet();
 		try {
 			// Hashes the keyword
 			byte[] mdbytes = this.sha512.digest(keyWord.getBytes("UTF-8"));
