@@ -163,8 +163,10 @@ public class View extends JPanel implements ActionListener {
 			for (DataFlavor data : trans.getTransferDataFlavors()) {
 				try {
 					Object text = trans.getTransferData(data);
-					if (text instanceof String)
+					if (text instanceof String) {
 						this.message.append((String) text);
+						return;
+					}
 				} catch (Exception ex) {
 
 				}
