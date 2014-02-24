@@ -85,6 +85,7 @@ public class View extends JPanel implements ActionListener {
 		SubType type = (SubType) this.subType.getSelectedItem();
 		this.subText = new JLabel(type.getTxt());
 		this.sub = new RegexTextField(type.getPattern(), "", type.getCol());
+		this.sub.setToolTipText(type.getTooltip());
 		north.add(new JLabel("     "));
 		north.add(this.subText);
 		north.add(this.sub);
@@ -152,6 +153,7 @@ public class View extends JPanel implements ActionListener {
 			this.sub.setText("");
 			this.sub.setColumns(type.getCol());
 			this.sub.setPattern(type.getPattern());
+			this.sub.setToolTipText(type.getTooltip());
 			this.subText.setText(type.getTxt());
 		} else if (e.getSource() == this.paste) {
 			// the current clipboard content is loaded

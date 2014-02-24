@@ -12,34 +12,36 @@ public enum SubType {
 	/**
 	 * Shift Cipher
 	 */
-	SHIFT(new ShiftCipher(0), "^[0-9]{1,2}$", "Shifter", "Shift", 2),
+	SHIFT(new ShiftCipher(0), "^[0-9]{1,2}$", "Shifter", "Shift", "Shift Amount 0-29", 2),
 
 	/**
 	 * Keyword Chipher
 	 */
-	KEY(new KeywordCipher(null), "^[" + new String(Util.getAlphabet()) + "]{1," + Util.getAlphabetLength() + "}$", "Keyword", "Keyword", 8),
+	KEY(new KeywordCipher(null), "^[" + new String(Util.getAlphabet()) + "]{1," + Util.getAlphabetLength() + "}$", "Keyword", "Keyword", "chars from a-z and äöüß (double chars get removed)", 8),
 
 	/**
 	 * Substitution Cipher
 	 */
-	SUBST(new SubstitutionCipher(Util.getAlphabet()), "^[" + new String(Util.getAlphabet()) + "]{1," + Util.getAlphabetLength() + "}$", "Substitution", "Alphabet", 20),
+	SUBST(new SubstitutionCipher(Util.getAlphabet()), "^[" + new String(Util.getAlphabet()) + "]{1," + Util.getAlphabetLength() + "}$", "Substitution", "Alphabet", "30 chars from a-z and äöüß", 20),
 
 	/**
 	 * Extended Keyword Cipher
 	 */
-	EXTENDED(new ExtendedKeywordCipher(null), ".*", "Extended Keyword", "Keyword", 8);
+	EXTENDED(new ExtendedKeywordCipher(null), ".*", "Extended Keyword", "Keyword", "Any chars are allowed", 8);
 
 	private final Cipher cipher;
 	private final Pattern pattern;
 	private final String title;
 	private final String txt;
+	private final String tooltip;
 	private final int col;
 
-	private SubType(Cipher cipher, String regex, String title, String txt, int col) {
+	private SubType(Cipher cipher, String regex, String title, String txt, String tooltip, int col) {
 		this.cipher = cipher;
 		this.pattern = Pattern.compile(regex);
 		this.title = title;
 		this.txt = txt;
+		this.tooltip = tooltip;
 		this.col = col;
 	}
 
@@ -82,6 +84,15 @@ public enum SubType {
 	 */
 	public Pattern getPattern() {
 		return this.pattern;
+	}
+	
+	/**
+	 * Gets the tooltip text
+	 * 
+	 * @return tooltip text
+	 */
+	public String getTooltip() {
+		return this.tooltip;
 	}
 
 }
